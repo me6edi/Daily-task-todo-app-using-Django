@@ -3,8 +3,9 @@
 {% block content %}
         <div class="border p-3">
             <form method="POST">
-                <input type="text">
-                <input class="btn btn-info" type="text" value="Submit">
+                {% csrf_token %}
+                {{ form }}
+                <input class="btn btn-info" type="submit" value="Submit">
             </form>
             <hr>
             {% for todoapp in todo %}
