@@ -13,11 +13,15 @@
             <div class="border p-3 mb-3">
                 <div class="row">
                     <div class="col-md-8">
+                        {% if todoapp.complete == True %}
                         <p>{{ todoapp.content }}</p>
+                        {% else %}
+                        <p>{{ todoapp.content }}</p>
+                        {% endif %}
                     </div>
                     <div class="col-md-4">
                         <a href="{% url 'update' todoapp.id %}" class="btn btn-success sm">Edit</a>
-                        <a href="#" class="btn btn-danger sm">Delete</a>
+                        <a href="{% url 'delete' todoapp.id %}" class="btn btn-danger sm">Delete</a>
                     </div>
                 </div>
                 <small>{{ todoapp.date }}</small>

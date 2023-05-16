@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %} Todo App {% endblock %}
+{% block content %}
+        <div class="border p-3">
+            <h1>Delete Task</h1>
+            <div class="alert alert-danger">
+                <p>Are you sure you want to delete?</p>
+            </div>
+            <form method="POST">
+                {% csrf_token %} 
+                <a href="#" class="btn btn-success">Cancle</a>
+                <input type="submit" class="btn btn-danger" value="Confirm">
+            </form>
+        </div>         
+{% endblock %}

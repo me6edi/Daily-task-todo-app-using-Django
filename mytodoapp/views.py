@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Task
-from .forms import TaskForm
+from .forms import TaskForm,UpdateTaskForm
 
 # Create your views here.
 def index(request):
@@ -33,15 +33,25 @@ def index(request):
     }
     return render(request, 'index.html',context)
 
-def update(request, pk):
-    todoappvalue = Task.objects.get(id=pk)
+def update(request, id):
+    todoappvalue = Task.objects.get(pk = id)
+
     if request.method == 'POST':
-        form = TaskForm(request.POST, instance = todoappvalue)
-    
+        forms = UpdateTaskForm(request.POST, instance = todoappvalue)
+        if forms.is_valid():
+            forms.save()
+            return redirect('/')
     else:
-        forms = TaskForm(instance = todoappvalue)
+        forms = UpdateTaskForm(instance = todoappvalue)
 
     context = {
         "form":forms
     }
     return render(request,'update.html', context)
+
+def delete(request, id):
+    dailytasktodo = Task.objects.get(pk=id)
+    if request.method == 'POST':
+        dailytasktodo.delete()
+        return redirect('/')
+    return render(request,'delete.html')
